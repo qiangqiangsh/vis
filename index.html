@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css" />
+  <script src="http://api.map.baidu.com/api?v=3.0&ak=YKOTTURQmjdZMxmBZ8q6h7kXLdCCmiLy"></script>
+</head>
+
+<body>
+  <header>
+    <h1>网吧数据分析</h1>
+    <div class="showTime">当前时间：2020年3月17-0时54分14秒</div>
+    <script>
+      var t = null;
+      t = setTimeout(time, 1000); //开始运行
+      function time() {
+        clearTimeout(t); //清除定时器
+        dt = new Date();
+        var y = dt.getFullYear();
+        var mt = dt.getMonth() + 1;
+        var day = dt.getDate();
+        var h = dt.getHours(); //获取时
+        var m = dt.getMinutes(); //获取分
+        var s = dt.getSeconds(); //获取秒
+        document.querySelector(".showTime").innerHTML =
+          "当前时间：" +
+          y +
+          "年" +
+          mt +
+          "月" +
+          day +
+          "-" +
+          h +
+          "时" +
+          m +
+          "分" +
+          s +
+          "秒";
+        t = setTimeout(time, 1000); //设定定时器，循环运行
+      }
+    </script>
+  </header>
+  <section class="mainbox">
+
+    <div class="column">
+      <div class="panel line2">
+        <h2>上网时间分布</h2>
+        <div class="chart"></div>
+        <div class="panel-footer"></div>
+      </div>
+
+      <div class="panel bar">
+        <h2>年龄分布</h2>
+        <div class="chart"></div>
+        <div class="panel-footer"></div>
+      </div>
+
+      <div class="panel pie">
+        <h2>外来人口比例</h2>
+        <div class="chart"></div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="no">
+        <div class="no-hd">
+          <ul>
+            <li>125811</li>
+            <li>104563</li>
+          </ul>
+        </div>
+
+        <div class="no-bd">
+          <ul>
+            <li>前端需求人数</li>
+            <li>市场供应人数</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="map">
+        <div class="panel">
+          <div class="panel-footer"></div>
+          <div class=h2></div>
+          <div id="map4"></div>
+          <script>
+
+            //查看详情
+            var map = new BMap.Map("map4");
+            var point = new BMap.Point(106.569253, 29.586056);
+            map.centerAndZoom(point, 12);
+            map.setMapStyleV2({
+              styleId: '6d706c9dfbdc81ebf5f9d5d02ada58dd'
+            });
+            var marker = new BMap.Marker(point);
+            var mapPoints = [{
+              siteid: 50010500000000,
+              title: "江北****会所）",
+              lng: 106.569253,
+              lat: 29.586056
+            },
+            {
+              siteid: 50010500000000,
+              title: "乌托****网吧）",
+              lng: 106.488929,
+              lat: 29.602083
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****启网吧",
+              lng: 106.534991,
+              lat: 29.58135
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****儿网吧",
+              lng: 106.492853,
+              lat: 29.593183
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****会所）",
+              lng: 106.550808,
+              lat: 29.587238
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****风网吧",
+              lng: 106.609207,
+              lat: 29.609128
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****验吧)",
+              lng: 106.580741,
+              lat: 29.61691
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****闲网吧",
+              lng: 106.538275,
+              lat: 29.577077
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****潮网吧",
+              lng: 106.538727,
+              lat: 29.587331
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****会所）",
+              lng: 106.496381,
+              lat: 29.583907
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****族网吧",
+              lng: 106.46918,
+              lat: 29.569437
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****会所）",
+              lng: 106.530324,
+              lat: 29.590497
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****渝网吧",
+              lng: 106.484774,
+              lat: 29.589275
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****奇网吧",
+              lng: 106.713615,
+              lat: 29.619318
+            },
+            {
+              siteid: 50010500000000,
+              title: "江北****会所）",
+              lng: 106.485834,
+              lat: 29.58671
+            }
+            ];
+
+            var i = 0;
+            map.addOverlay(marker);
+            map.enableScrollWheelZoom(true);
+            // 函数 创建多个标注
+            function markerFun(points, infoWindows) {
+              var markers = new BMap.Marker(points);
+              map.addOverlay(markers);
+              //markers.setLabel(label);
+              markers.addEventListener("click", function (event) {
+                console.log("0001");
+                map.openInfoWindow(infoWindows, points); //参数：窗口、点  根据点击的点出现对应的窗口
+              });
+            }
+            for (; i < mapPoints.length; i++) {
+              var points = new BMap.Point(mapPoints[i].lng, mapPoints[i].lat); //创建坐标点
+              var opts = {
+                width: 250,
+                height: 100,
+                title: mapPoints[i].title
+              };
+              /*var label = new BMap.Label(mapPoints[i].siteid, {
+                offset: new BMap.Size(25, 5)
+              });*/
+              var infoWindows = new BMap.InfoWindow(mapPoints[i].title, opts);
+              markerFun(points, infoWindows);
+            }
+
+
+
+            /*var map = new BMap.Map('map4');
+            map.centerAndZoom(new BMap.Point(116.404, 39.928), 15);
+            map.enableScrollWheelZoom(true);
+            // 创建点标记
+            var marker1 = new BMap.Marker(new BMap.Point(116.404, 39.925));
+            var marker2 = new BMap.Marker(new BMap.Point(116.404, 39.915));
+            var marker3 = new BMap.Marker(new BMap.Point(116.395, 39.935));
+            var marker4 = new BMap.Marker(new BMap.Point(116.415, 39.931));
+            // 在地图上添加点标记
+            map.addOverlay(marker1);
+            map.addOverlay(marker2);
+            map.addOverlay(marker3);
+            map.addOverlay(marker4);*/
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="panel bar1">
+        <h2>籍贯分布</h2>
+        <div class="chart"></div>
+        <div class="panel-footer"></div>
+      </div>
+      <div class="panel bar2">
+        <h2>上网时长</h2>
+        <div class="chart"></div>
+        <div class="panel-footer"></div>
+      </div>
+      <div class="panel line3">
+        <h2>未成年人上网高峰时段</h2>
+        <div class="chart"></div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/flexible.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/echarts.min.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/china.js"></script>
+  <!--script src="js/myMap.js"></script-->
+
+</body>
+
+</html>
